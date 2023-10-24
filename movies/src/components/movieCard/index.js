@@ -14,31 +14,30 @@ import Grid from "@mui/material/Grid";
 import img from '../../images/film-poster-placeholder.png'
 import { Link } from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
-import React, { useContext  } from "react";
+import React, { useContext } from "react";
 import { MoviesContext } from "../../contexts/moviesContext";
 
 export default function MovieCard({ movie, action, listType }) {
-  
-  const discover = listType ==="Discover Movies";
 
-  const { favorites, watchList} = useContext(MoviesContext);
+  const discover = listType === "Discover Movies";
 
-  const favWatchMovies = discover?favorites : watchList;
-  const favWatchIcon = discover?FavoriteIcon : WatchListIcon;
+  const { favorites, watchList } = useContext(MoviesContext);
+
+  const favWatchMovies = discover ? favorites : watchList;
   if (favWatchMovies.find((id) => id === movie.id)) {
-    movie.favorite = true;
+    movie.favwatch = true;
   } else {
-    movie.favorite = false
- }
+    movie.favwatch = false
+  }
 
 
   return (
     <Card sx={{ maxWidth: 345 }}>
-            <CardHeader
+      <CardHeader
         avatar={
-          movie.favorite ? (
+          movie.favwatch ? (
             <Avatar sx={{ backgroundColor: 'red' }}>
-              {discover?<FavoriteIcon />:<WatchListIcon />}
+              {discover ? <FavoriteIcon /> : <WatchListIcon />}
             </Avatar>
           ) : null
         }
